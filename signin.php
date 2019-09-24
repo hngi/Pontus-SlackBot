@@ -54,7 +54,7 @@
 
                     <div class="" align="center">
                         <h4 class="bottomH">Forget Password?</h5>
-                    <h4 class="bottomH">Don't have an Account? <a href="#">sign up here</a></h5>
+                    <h4 class="bottomH">Don't have an Account? <a href="signup.php">sign up here</a></h5>
                     </div>
                         
 
