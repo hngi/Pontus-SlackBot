@@ -9,6 +9,7 @@
   "author": "Team Pontus",
   "license": "MIT",
   "dependencies": {
-    "slackbots": "^1.2.0"
+    "slackbots": "^1.2.0",
+    "uuid": "^3.3.3"
   }
 }
