@@ -74,6 +74,6 @@
 
 </body>
 
-<script src="assets/bootstrap4/bootstrap.min.js"></script>
+<script src="assets/bootstrap.min.js"></script>
 
 </html>
