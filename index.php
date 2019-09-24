@@ -8,7 +8,7 @@
     <title>HNG: SlackBot</title>
 
     <!-- Styles -->
-    <link href="assets/bootstrap4/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
     <link href="assets/style.css" rel="stylesheet">
 
 </head>
