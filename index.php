@@ -1,5 +1,7 @@
 <?php
    include("config.php");
+ 
+
    session_start();
    if(isset($_SESSION["login_user"]))  
     {  
@@ -45,6 +47,10 @@
       }
    }
    }
+
+
+   
+   
 ?>
 
 <!DOCTYPE html>
@@ -66,13 +72,15 @@
 
 <body>
     <div id="container" class="row">
+    
+       
         <!--<img src="assets/books3.jpg" alt="opened book">-->
         <main id="main">
             <div id="loginulcontainer" class="col-sm-12">
                 <div id="login-tab" class="active">LOGIN</div>
                 <div id="register-tab">REGISTER</div>
                 <div id="logincontainer">
-                    
+                   
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <div class="form-group">
                             <input type="email" name="email" class="form-control inputbox" placeholder="Email" id="login-username">
