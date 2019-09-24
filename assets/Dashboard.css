@@ -1,0 +1,64 @@
+body{
+    background: #00C2F4;
+}
+
+
+
+.container.first-child{
+    height: 100px;
+    width: 75%;
+    background: rgba(0, 0, 0, .2);
+    margin-top: 40px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.container.second-child{
+    height: 100px;
+    width: 80%;
+    background: rgba(0, 0, 0, .4);
+    margin-top: -70px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.container{
+    background: #002B57;
+    margin-top: -70px;
+    border-radius: 20px;
+    padding: 20px;
+    /* color: white; */
+}
+ section.left{
+    /* background: red */
+    color: white;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+section.left .logo h3{
+    color: #005D75;
+    font-weight: 900;
+}
+ section.right{
+    background: white;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 20px;
+}assets/images/disability.svg
+section.right img{
+    width: 50px;
+}
+section.right header.div{
+   justify-content: end;
+}
+.card {
+    background: #002B57 !important;
+}
+ul li{
+    list-style-type: none;
+}
+.input button {
+    background: #002B57 !important;
+    outline: none !important;
+}
+.input button:focus {
+    outline: none !important;
+}
