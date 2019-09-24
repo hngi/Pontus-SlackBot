@@ -1,0 +1,15 @@
+{
+  "name": "saveconvo",
+  "version": "1.0.0",
+  "description": "Slackbot that saves user conversations",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Team Pontus",
+  "license": "MIT",
+  "dependencies": {
+    "slackbots": "^1.2.0",
+    "uuid": "^3.3.3"
+  }
+}
