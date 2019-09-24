@@ -1,64 +1,3 @@
-const SlackBot = require('slackbots');
-const axios = require('axios');
-
-const bot_key = new SlackBot({
-  token: 'xoxb-770573893525-757805141554-9DEXgWy77LTp2SGC6bOWOTQI',
-  name: 'Jengineersbot'
-});
-
-// Initialize conversations to empty
-let conversations = [];
-
-// Start Handler
-bot_key.on('start', () => {
-  const params = {
-    icon_emoji: ':smiley:'
-  };
-
-  bot_key.postMessageToChannel(
-    'bot',
-    ' @Jengineersbot! would tell you the authors name',
-    params
-  );
-});
-
-// Error Handler
-bot_key.on('error', err => console.log(err));
-
-// Message Handler
-bot_key.on('message', data => {
-  if (data.type !== 'message') {
-    return;
-  } 
-  handleMessage(data);
-  
-});
-
-
-
-// display Author
-function author() {
-  const params = {
-    icon_emoji: ':smiley:'
-  };
-  const mes = `The authors name is Ugbogu Justice`;
-  bot_key.postMessageToChannel('bot', mes, params);
-}
-
-// Show Help Text
-function runHelp() {
-  const params = {
-    icon_emoji: ':question:'
-  };
-
-  bot_key.postMessageToChannel(
-    'bot',
-    `Type @Jengineersbot with either 'author' to get the Authours Name`,
-    params
-  );
-}
-
-
 
 // Reaponse to data
 const handleMessage = (data) => {
@@ -87,5 +26,5 @@ const handleMessage = (data) => {
         console.error(error)
       })
   }
-  // return console.log(conversations)
+  return console.log(conversations)
 }
