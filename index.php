@@ -1,6 +1,13 @@
 <?php
    include("config.php");
    session_start();
+
+	require 'error_report.php';
+	//setting up error[error_reporting,display_errors,display_startup_errors]
+	// $error_reporting = new error_report(E_ALL,1,1);
+	$error_reporting = new error_report(0,0,0);
+	$error_reporting->error();
+
    if(isset($_SESSION["login_user"]))  
     {  
         header("location:welcome.php");  
