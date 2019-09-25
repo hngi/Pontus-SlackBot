@@ -10,10 +10,10 @@
  */
 
 // Database information
-$dbname = "wdc";
-$user = "root";
-$host = "localhost";
-$password = "moimii";
+$dbname = "";
+$user = "";
+$host = "";
+$password = "";
 
 $conn = mysqli_connect("$host", "$user", "$password", "$dbname");
 
