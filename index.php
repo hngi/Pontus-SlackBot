@@ -35,8 +35,8 @@
                 <ul class="nav navbar-nav justify-content-end">
                     <li class="nav-item"><a class="nav-link">Home</a> </li>
                     <li class="nav-item"><a class="nav-link">Pricing</a> </li>
-                    <li class="nav-item"><a class="nav-link">Login</a> </li>
-                    <li class="nav-item"><a class="nav-link">Sign up</a> </li>
+                    <li class="nav-item"><a href="signin.php" class="nav-link">Login</a> </li>
+                    <li class="nav-item"><a href="signup.php" class="nav-link">Sign up</a> </li>
                 </ul>
             </div>
         </div>
