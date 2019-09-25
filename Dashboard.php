@@ -1,4 +1,8 @@
-<?php require "session.php"; ?>
+<?php 
+    require_once "config.php";
+    require "session.php"; 
+    is_login();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,7 +29,7 @@
                         <div class="sidebar-info">
                             <h3 class="mt-4">Basics</h3>
                             <ul>
-                                <li><i class="fa fa-check"></i> Lorem lique earum voluptatibus.</li>
+                                <li><i class="fa fa-check"></i> View only your conversation.</li>
                                 <li><i class="fa fa-check"></i> Lorem lique earum voluptatibus.</li>
                                 <li><i class="fa fa-check"></i> Lorem lique earum voluptatibus.</li>
                                 <li><i class="fa fa-check"></i> Lorem lique earum voluptatibus.</li>
@@ -44,27 +48,32 @@
                             </div>
                     </header>
                     <hr>
-
+                
                         <div class="section-info">
                             <h3 class="text-grey">Details here</h3>
                             <div class="wrapper mt-5 mb-5">
+                                <?php 
+                                    $user_email =  $_SESSION["login_email"];
+                                    $sql = " select * from conversation where email = '$user_email' ";
+    
+                                    $result = mysqli_query($conn, $sql);
                                     
+                                while( $row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                                    $username = $row['username'];
+                                    $conversation = $row['conversation'];
+
+                                ?> 
                             <div class="card d-flex p-4 text-white">
                                     <img src="assets/images/disability.svg" alt="user-image" width="50">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus magnam consequuntur possimus accusantium officia nisi vitae, obcaecati cupiditate error neque placeat totam? Suscipit voluptate maiores cupiditate. Qui nemo deserunt cupiditate.</p>
+                                    <span ><?php echo $username ?? ''; ?></span>
+                                <p><?php echo $conversation ?? ''; ?></p>
                             </div>
+                            <br />
+                                <?php }?>
+                                
                         </div>
-                            <div class="wrapper d-flex mt-5 mb-5">
-                                    
-                            <div class="card -flex p-4 text-white">
-                                    <img src="assets/images/disability.svg" alt="user-image" class="rounded-circle" width="50">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus magnam consequuntur possimus accusantium officia nisi vitae, obcaecati cupiditate error neque placeat totam? Suscipit voluptate maiores cupiditate. Qui nemo deserunt cupiditate.</p>
-                            </div>
-                        </div>                                
-
-
-
-                            <div class="input d-flex mt-5">
+                                                        
+                         <div class="input d-flex mt-5">
                                 <input type="text" class="form-control mr-4" placeholder="Please type your message here">
                                 <button class="btn btn-primary" style="height: auto;">ENTER </button>
                             </div>
