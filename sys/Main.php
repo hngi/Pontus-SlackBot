@@ -18,9 +18,9 @@ if(!defined('PON_DIR'))
 require_once PON_DIR."config.php";
 
 // Load the database file
-require_once PON_DIR."sys/database/MySql.php";
+require_once PON_DIR."sys/database/MySqli.php";
 
 // Database connection
-$db = new MySql($host, $user, $password, $dbname);
+$db = new MySqliServer($host, $user, $password, $dbname);
 
 ?>
