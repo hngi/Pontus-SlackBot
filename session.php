@@ -2,7 +2,8 @@
    include "config.php";
    session_start();
    
-   $user_check = $_SESSION['login_user'];
+  $_SESSION['login_user_username'] ?? '';
+  $user_check =  $_SESSION["login_user_email"] ?? '';
 
    $a = " select * from users where email = '$user_check' ";
    
@@ -10,10 +11,16 @@
    
    $row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
    
-   $login_email = $row['email'];
+   $_SESSION["login_fullname"] = $login_email = $row['full_name'];
+   $_SESSION["login_email"] = $login_email = $row['email'];
+   $_SESSION["login_username"] = $login_email = $row['username'];
+
    
-   if(!isset($_SESSION['login_user'])){
-      header("location:login.php");
-      die();
+   
+   function is_login() {
+      if(!isset($_SESSION['login_user'])){
+         header("location:signin.php");
+         die();
+      }
    }
 ?>

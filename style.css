@@ -1,0 +1,22 @@
+.hero{
+    width: 100%;
+    height: 600px;
+    padding: 30px;
+
+}
+
+.img-block{
+    width: 500px;
+
+}
+
+.hero-heading{
+    padding: 30px;
+    margin: 70px  auto;
+}
+
+.top-header{
+    box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
+    padding: 10px 70px;
+    width: 100% !important;
+}

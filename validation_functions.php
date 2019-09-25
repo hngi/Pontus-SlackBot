@@ -95,7 +95,7 @@
     return preg_match($email_regex, $value) === 1;
   }
 
-  function validate($conn,$fullname,$username,$email,$phone_number,$password,$confirm_password) {
+  function validate($conn,$fullname,$username,$email,$password) {
    $errors = [];
    
 
@@ -124,16 +124,6 @@
      $errors[] = "Username not allowed. Try another.";
     }
 
-    if(is_blank($phone_number)) {
-     
-      $errors[] = "Phone number cannot be blank.";
-     } elseif (!has_length($phone_number, array('min' => 5, 'max' => 11))) {
-      $errors[] = "Phone number must be between 5 and 11 characters.";
-     } elseif (checkDatabase($conn,"users","username",$username) == true) {
-      $errors[] = "Phone number not allowed. Try another.";
-     }
- 
-
     if($password) {
       if(is_blank($password)) {
        $errors[] = "Password cannot be blank.";
@@ -147,12 +137,6 @@
        $errors[] = "Password must contain at least 1 number";
       } elseif (!preg_match('/[^A-Za-z0-9\s]/',$password)) {
        $errors[] = "Password must contain at least 1 symbol";
-      }
-
-      if(is_blank($confirm_password)) {
-       $errors[] = "Confirm password cannot be blank.";
-      } elseif ($password !==$confirm_password) {
-       $errors[] = "Password and confirm password must match.";
       }
     }
 
