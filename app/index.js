@@ -44,8 +44,10 @@ bot.on('message', (data) => {
 const handleMessage = async (data) => {
   let message = data.text;
 
+
   if (message.includes(' save my convo')) {
     let id = data.user;
+    let userConvo = message.replace(' save my convo', '')
     const users = await bot.users;
     const user = users.find(user => {
       return user.id == id
@@ -56,7 +58,7 @@ const handleMessage = async (data) => {
     let newMessage = {
       id: uuidv4(),
       token: `${process.env.SERVER_TOKEN}`,
-      message: message.replace(' save my convo', ''),
+      message: userConvo,
       email: useremail
     }
 
@@ -77,7 +79,7 @@ const getChannel = () => {
 
 // Push messages to server
 const sendConvo = (data) => {
-  let url = ''
+  let url = 'http://localhost:3000/users'
   let axiosConfig = {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -102,8 +104,7 @@ const runHelp = () => {
 
   bot.postMessageToChannel(
     'general',
-    `Type *@saveconvo* with *save my convo* then paste the contents 
-    you want to save and *help* to get this instruction again`,
+    `Type *@saveconvo* with *save my convo* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
 }
