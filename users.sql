@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 25, 2019 at 02:24 PM
+-- Generation Time: Sep 26, 2019 at 11:21 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `hng_login`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `conversation`
+--
+
+CREATE TABLE `conversation` (
+  `id` int(11) NOT NULL,
+  `email` varchar(225) NOT NULL,
+  `username` varchar(225) NOT NULL,
+  `conversation` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `conversation`
+--
+
+INSERT INTO `conversation` (`id`, `email`, `username`, `conversation`) VALUES
+(1, 'pascalozioma18@gmail.com', 'ozioma12', 'This is the first conversation'),
+(2, 'pascalozioma18@gmail.com', 'ozioma12', 'This is the second conversation'),
+(3, 'pascalozioma18@gmail.com', 'ozioma12', 'This is the third conversation');
 
 -- --------------------------------------------------------
 
@@ -48,6 +70,12 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `username`, `password`) VALUES
 --
 
 --
+-- Indexes for table `conversation`
+--
+ALTER TABLE `conversation`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -56,6 +84,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `conversation`
+--
+ALTER TABLE `conversation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
