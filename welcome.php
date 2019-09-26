@@ -1,6 +1,8 @@
 <?php
-   include "session.php";
+    require_once "config.php";
+    include "session.php";
    
+    is_login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
