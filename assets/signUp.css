@@ -96,6 +96,7 @@ body{
     border-radius: 20px;
 
 }
+
 .hasError .form-control{
     border: 1px solid red;
 }

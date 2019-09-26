@@ -1,3 +1,4 @@
+
 <?php require "functions.php"; ?>
 <!DOCTYPE html>
 <html>
@@ -10,8 +11,10 @@
     </head>
     <body>
 
-    
 
+    </head>
+    <body>
+        
         <section class="loginBox">
 
             <div class="">
@@ -25,6 +28,7 @@
                </div> 
                <div class="col-lg-6 col-md-8 col-md-12">
                     <form class="form"  method="POST" onsubmit="return validateForm() action="reg.php">
+                    <form class="form" onsubmit="return validateForm()">
 
                     <div class="form-header">
                         <h3 class="h-underline--blue">Sign Up</h3>
@@ -55,6 +59,19 @@
  
                     <div class="form-group">
                         <input id="password" class="form-control" name="password" type="password" placeholder="Password here" required/>
+
+                    <div class="form-group">
+                        <input id="email" class="form-control" type="text" placeholder="Type your email address here"/>
+                    </div>
+
+                    
+                    <div class="form-group">
+                            <input id="name" class="form-control" type="text" placeholder="Type your full name here"/>
+                        </div>
+                        
+
+                    <div class="form-group">
+                            <input id="password" class="form-control" type="password" placeholder="Password here"/>
                     </div>
 
                     <div class="form-group">
@@ -64,6 +81,7 @@
 
                     <div class="form-group">
                         <button type="submit" name="reg" class="btn btn-primary btn-block"><a href="signin.php"></a> continue </button>
+                        <button type="submit" class="btn btn-primary btn-block"><a href="signin.php"></a> continue </button>
                     </div>
                     <p align="center" >or</p>
 
@@ -93,5 +111,6 @@
     <script src="assets/jquery.js"></script>
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="assets/script.js" type="text/javascript"></script>
 </html>
