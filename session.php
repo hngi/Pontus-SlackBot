@@ -18,9 +18,8 @@
    
    
    function is_login() {
-      if(!isset($_SESSION['login_user'])){
-         header("location:signin.php");
-         die();
+      if(!isset($_SESSION['login_user_username'])){
+         header("location:signin.php"); 
       }
    }
 ?>
