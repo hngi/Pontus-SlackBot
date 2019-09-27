@@ -80,7 +80,7 @@ const getChannel = () => {
 // Push messages to server
 const sendConvo = (data) => {
   let status = ''
-  let url = 'https://www.gjengineer.com/pontus/index.php'
+  let url = 'https://www.gjengineer.com/pontus/pontusdrive.com/api/slackbot.php'
   let axiosConfig = {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
