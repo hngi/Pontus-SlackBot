@@ -55,17 +55,22 @@ const handleMessage = async (data) => {
 
     const useremail = user.profile.email
 
-    let newMessage = {
-      id: uuidv4(),
-      token: `${process.env.SERVER_TOKEN}`,
-      message: userConvo,
-      email: useremail
+    console.log(getUser(useremail));
+
+    if (getUser(useremail) != "") {
+      let newMessage = {
+        id: uuidv4(),
+        token: `${process.env.SERVER_TOKEN}`,
+        message: userConvo,
+        email: useremail
+      }
+
+      conversations.push(newMessage)
+      sendConvo(newMessage)
+      messageSaved()
+    } else {
+      notSaved()
     }
-
-    conversations.push(newMessage)
-    sendConvo(newMessage)
-    messageSaved()
-
   } else if (message.includes(' help')) {
     runHelp()
   }
@@ -79,7 +84,6 @@ const getChannel = () => {
 
 // Push messages to server
 const sendConvo = (data) => {
-  let status = ''
   let url = 'https://www.gjengineer.com/pontus/pontusdrive.com/api/slackbot.php'
   let axiosConfig = {
     headers: {
@@ -95,6 +99,18 @@ const sendConvo = (data) => {
     .catch((err) => {
       console.log("AXIOS ERROR: ", err);
     })
+}
+
+// Get User from drive
+const getUser = (email) => {
+  let url = 'https://www.gjengineer.com/pontus/pontusdrive.com/api/slackbot.php'
+  const user = axios({
+    url: `${url}?email=${email}&token=${process.env.SERVER_TOKEN}`,
+    method: 'get'
+  }).then(res => {
+    res.email
+  })
+  return user
 }
 
 // Show Help
@@ -130,7 +146,7 @@ const notSaved = () => {
 
   bot.postMessageToChannel(
     'general',
-    `Your message was not saved`,
+    `Your message was not saved. Please sign up with us!`,
     params
   );
 }
