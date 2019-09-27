@@ -1,3 +1,6 @@
+console.log('Pontus reporting...... The decepticons are live. The revolution will be televised');
+
+
 const SlackBot = require('slackbots');
 const axios = require('axios')
 const dotenv = require('dotenv')
