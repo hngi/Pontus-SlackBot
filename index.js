@@ -44,8 +44,10 @@ bot.on('message', (data) => {
 const handleMessage = async (data) => {
   let message = data.text;
 
+
   if (message.includes(' save my convo')) {
     let id = data.user;
+    let userConvo = message.replace(' save my convo', '')
     const users = await bot.users;
     const user = users.find(user => {
       return user.id == id
@@ -56,7 +58,7 @@ const handleMessage = async (data) => {
     let newMessage = {
       id: uuidv4(),
       token: `${process.env.SERVER_TOKEN}`,
-      message: message.replace(' save my convo', ''),
+      message: userConvo,
       email: useremail
     }
 
@@ -77,7 +79,8 @@ const getChannel = () => {
 
 // Push messages to server
 const sendConvo = (data) => {
-  let url = ''
+  let status = ''
+  let url = 'https://www.gjengineer.com/pontus/pontusdrive.com/api/slackbot.php'
   let axiosConfig = {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -102,8 +105,7 @@ const runHelp = () => {
 
   bot.postMessageToChannel(
     'general',
-    `Type *@saveconvo* with *save my convo* then paste the contents 
-    you want to save and *help* to get this instruction again`,
+    `Type *@saveconvo* with *save my convo* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
 }
@@ -117,6 +119,18 @@ const messageSaved = () => {
   bot.postMessageToChannel(
     'general',
     `Your message has been saved successfully`,
+    params
+  );
+}
+
+const notSaved = () => {
+  const params = {
+    icon_emoji: ':smile:'
+  }
+
+  bot.postMessageToChannel(
+    'general',
+    `Your message was not saved`,
     params
   );
 }
