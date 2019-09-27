@@ -1,12 +1,26 @@
-console.log('Pontus reporting...... The decepticons are live. The revolution will be televised');
-
-
+const http = require('http');
 const SlackBot = require('slackbots');
 const axios = require('axios')
 const dotenv = require('dotenv')
 const uuidv4 = require('uuid/v4');
 
 dotenv.config()
+
+const port = process.env.PORT || 3000;
+
+// Create a simple server
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, {
+    "Content-type": "text/plain"
+  });
+  res.end("Hello world\n");
+});
+
+server.listen(port, function () {
+  console.log(`Pontus reporting...... The decepticons are live at port: ${port}. The revolution will be televised`)
+});
+
+
 
 // Initialize conversations to empty
 let conversations = [];
