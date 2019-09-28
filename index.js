@@ -30,7 +30,7 @@ bot.on('start', () => {
     icon_emoji: ':robot_face:',
   };
 
-  bot.postMessageToChannel('general', 'Pontus reporting...Here to save your convo. Just hit me up in your DMs.', params);
+  bot.postMessageToChannel('general', 'Pontus reporting...I can save your conversations when mentioned in your DMs.', params);
 });
 
 // Error Handler
