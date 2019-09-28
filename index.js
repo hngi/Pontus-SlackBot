@@ -24,6 +24,7 @@ server.listen(port, function () {
 
 // Initialize conversations to empty
 let conversations = [];
+let result = ''
 
 const bot = new SlackBot({
   token: `${process.env.BOT_TOKEN}`,
@@ -38,11 +39,8 @@ bot.on('start', () => {
     icon_emoji: ':robot_face:',
   };
 
-  bot.postMessageToChannel('general', 'Here to save your convo', params);
+  bot.postMessageToChannel('general', 'Pontus reporting...Here to save your convo', params);
 });
-
-
-
 
 // Error Handler
 bot.on('error', (err) => console.log(err))
@@ -62,31 +60,35 @@ const handleMessage = async (data) => {
   let message = data.text;
 
 
-  if (message.includes(' save my convo')) {
+  if (message.includes(' save-this')) {
     let id = data.user;
-    let userConvo = message.replace(' save my convo', '')
+    let userConvo = message.replace(' save-this', '')
     const users = await bot.users;
     const user = users.find(user => {
       return user.id == id
     })
 
+    console.log(user);
+
     const useremail = user.profile.email
+    const username = user.name
 
-    console.log(getUser(useremail));
+    console.log(username);
 
-    if (getUser(useremail) != "") {
-      let newMessage = {
-        id: uuidv4(),
-        token: `${process.env.SERVER_TOKEN}`,
-        message: userConvo,
-        email: useremail
-      }
+    // if (getUser(useremail) != "") {
+    let newMessage = {
+      id: uuidv4(),
+      token: `${process.env.SERVER_TOKEN}`,
+      message: userConvo,
+      email: useremail
+    }
 
-      conversations.push(newMessage)
-      sendConvo(newMessage)
+    //   conversations.push(newMessage)
+
+    if (sendConvo(newMessage) != '') {
       messageSaved()
     } else {
-      notSaved()
+      notSaved(username)
     }
   } else if (message.includes(' help')) {
     runHelp()
@@ -111,34 +113,37 @@ const sendConvo = (data) => {
 
   axios.post(`${url}`, data, axiosConfig)
     .then((res) => {
+      result = res.data.email
       console.log("RESPONSE RECEIVED: ", res);
     })
     .catch((err) => {
       console.log("AXIOS ERROR: ", err);
     })
+
+  return result
 }
 
 // Get User from drive
-const getUser = (email) => {
-  let url = 'https://www.gjengineer.com/pontus/pontusdrive.com/api/slackbot.php'
-  const user = axios({
-    url: `${url}?email=${email}&token=${process.env.SERVER_TOKEN}`,
-    method: 'get'
-  }).then(res => {
-    res.email
-  })
-  return user
-}
+// const getUser = (email) => {
+//   let url = 'https://www.gjengineer.com/pontus/pontusdrive.com/api/slackbot.php'
+//   const user = axios({
+//     url: `${url}?email=${email}&token=${process.env.SERVER_TOKEN}`,
+//     method: 'get'
+//   }).then(res => {
+//     res.email
+//   })
+//   return user
+// }
 
 // Show Help
 const runHelp = () => {
   const params = {
-    icon_emoji: ':question:'
+    icon_emoji: ':question_block:'
   }
 
   bot.postMessageToChannel(
     'general',
-    `Type *@saveconvo* with *save my convo* then paste the contents you want to save and *help* to get this instruction again`,
+    `Type *@saveconvo* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
 }
@@ -146,7 +151,7 @@ const runHelp = () => {
 // Prompt on save
 const messageSaved = () => {
   const params = {
-    icon_emoji: ':smile:'
+    icon_emoji: ':robot-face:'
   }
 
   bot.postMessageToChannel(
@@ -156,13 +161,13 @@ const messageSaved = () => {
   );
 }
 
-const notSaved = () => {
+const notSaved = (username) => {
   const params = {
-    icon_emoji: ':smile:'
+    icon_emoji: ':worried:'
   }
 
-  bot.postMessageToChannel(
-    'general',
+  bot.postMessageToUser(
+    `${username}`,
     `Your message was not saved. Please sign up with us!`,
     params
   );
