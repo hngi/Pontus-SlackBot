@@ -30,7 +30,7 @@ bot.on('start', () => {
     icon_emoji: ':robot_face:',
   };
 
-  bot.postMessageToChannel('general', 'Pontus reporting...Here to save your convo', params);
+  bot.postMessageToChannel('general', 'Pontus reporting...Here to save your convo. Just hit me up in your DMs.', params);
 });
 
 // Error Handler
@@ -88,15 +88,12 @@ const sendConvo = (data, useremail, username) => {
 
   axios.post(`${url}`, data, axiosConfig)
     .then((res) => {
-      if (res.data.email != useremail) {
-        notSaved(username)
+      if (typeof res.data !== 'object') {
+        messageEmpty(username)
       } else if (res.data.email == useremail) {
         messageSaved(username)
-      } else if (res.data == `Nothing to save
-      
-      
-      `) {
-        messageEmpty(username)
+      } else if (res.data.email != useremail) {
+        notSaved(username)
       }
       console.log("RESPONSE RECEIVED: ", res);
     })
@@ -108,7 +105,7 @@ const sendConvo = (data, useremail, username) => {
 // Show Help
 const runHelp = () => {
   const params = {
-    icon_emoji: ':question_block:'
+    icon_emoji: ':question:'
   }
 
   bot.postMessageToChannel(
