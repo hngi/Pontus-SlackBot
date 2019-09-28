@@ -1,3 +1,4 @@
+const http = require('http');
 const SlackBot = require('slackbots');
 const axios = require('axios')
 const dotenv = require('dotenv')
@@ -5,27 +6,32 @@ const uuidv4 = require('uuid/v4');
 
 dotenv.config()
 
-// Initialize conversations to empty
-let conversations = [];
+const port = process.env.PORT || 3000;
+
+// Create a simple server
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, {
+    "Content-type": "text/plain"
+  });
+  res.end(`Pontus reporting...... The decepticons are live at port: ${port}. The revolution will be televised`);
+});
+
+server.listen(port, function () {
+  console.log(`Pontus reporting...... The decepticons are live at port: ${port}. The revolution will be televised`)
+});
 
 const bot = new SlackBot({
   token: `${process.env.BOT_TOKEN}`,
   name: 'saveconvo',
 });
 
-// Need a function to determine the current channel
-
-
 bot.on('start', () => {
   const params = {
     icon_emoji: ':robot_face:',
   };
 
-  bot.postMessageToChannel('general', 'Here to save your convo', params);
+  bot.postMessageToChannel('general', 'Pontus reporting...I can save your conversations when mentioned in your DMs.', params);
 });
-
-
-
 
 // Error Handler
 bot.on('error', (err) => console.log(err))
@@ -39,51 +45,39 @@ bot.on('message', (data) => {
   handleMessage(data)
 })
 
-
 // Reaponse to data
 const handleMessage = async (data) => {
   let message = data.text;
 
-
-  if (message.includes(' save my convo')) {
+  if (message.includes(' save-this')) {
     let id = data.user;
-    let userConvo = message.replace(' save my convo', '')
+    let userConvo = message.replace(' save-this', '')
     const users = await bot.users;
     const user = users.find(user => {
       return user.id == id
     })
 
-    const useremail = user.profile.email
+    const useremail = user.profile.email.toLowerCase()
+    const username = user.name
 
-    console.log(getUser(useremail));
+    // console.log(username);
 
-    if (getUser(useremail) != "") {
-      let newMessage = {
-        id: uuidv4(),
-        token: `${process.env.SERVER_TOKEN}`,
-        message: userConvo,
-        email: useremail
-      }
-
-      conversations.push(newMessage)
-      sendConvo(newMessage)
-      messageSaved()
-    } else {
-      notSaved()
+    let newMessage = {
+      id: uuidv4(),
+      token: `${process.env.SERVER_TOKEN}`,
+      message: userConvo,
+      email: useremail
     }
+
+    sendConvo(newMessage, useremail, username)
   } else if (message.includes(' help')) {
     runHelp()
   }
-  return console.log(conversations)
-}
-
-// Get channel
-const getChannel = () => {
-
+  // return console.log(conversations)
 }
 
 // Push messages to server
-const sendConvo = (data) => {
+const sendConvo = (data, useremail, username) => {
   let url = 'https://www.gjengineer.com/pontus/pontusdrive.com/api/slackbot.php'
   let axiosConfig = {
     headers: {
@@ -94,23 +88,18 @@ const sendConvo = (data) => {
 
   axios.post(`${url}`, data, axiosConfig)
     .then((res) => {
+      if (typeof res.data !== 'object') {
+        messageEmpty(username)
+      } else if (res.data.email == useremail) {
+        messageSaved(username)
+      } else if (res.data.email != useremail) {
+        notSaved(username)
+      }
       console.log("RESPONSE RECEIVED: ", res);
     })
     .catch((err) => {
       console.log("AXIOS ERROR: ", err);
     })
-}
-
-// Get User from drive
-const getUser = (email) => {
-  let url = 'https://www.gjengineer.com/pontus/pontusdrive.com/api/slackbot.php'
-  const user = axios({
-    url: `${url}?email=${email}&token=${process.env.SERVER_TOKEN}`,
-    method: 'get'
-  }).then(res => {
-    res.email
-  })
-  return user
 }
 
 // Show Help
@@ -121,32 +110,44 @@ const runHelp = () => {
 
   bot.postMessageToChannel(
     'general',
-    `Type *@saveconvo* with *save my convo* then paste the contents you want to save and *help* to get this instruction again`,
+    `Type *@saveconvo* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
 }
 
 // Prompt on save
-const messageSaved = () => {
+const messageSaved = (username) => {
   const params = {
-    icon_emoji: ':smile:'
+    icon_emoji: ':robot-face:'
   }
 
-  bot.postMessageToChannel(
-    'general',
+  bot.postMessageToUser(
+    `${username}`,
     `Your message has been saved successfully`,
     params
   );
 }
 
-const notSaved = () => {
+const notSaved = (username) => {
   const params = {
-    icon_emoji: ':smile:'
+    icon_emoji: ':worried:'
   }
 
-  bot.postMessageToChannel(
-    'general',
-    `Your message was not saved. Please sign up with us!`,
+  bot.postMessageToUser(
+    `${username}`,
+    `Your message was not saved. Please you'll need to sign up on the <https://gjengineer.com/pontus/pontusdrive.com/register.php|external drive>`,
+    params
+  );
+}
+
+const messageEmpty = (username) => {
+  const params = {
+    icon_emoji: ':worried:'
+  }
+
+  bot.postMessageToUser(
+    `${username}`,
+    `There is nothing to save here. Please ensure you have copied and pasted the content you wish to save.`,
     params
   );
 }
