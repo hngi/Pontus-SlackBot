@@ -36,7 +36,7 @@ bot.on('start', () => {
 
   bot.postMessageToChannel(
     'random',
-    'Pontus reporting...I can save your conversations when mentioned in your DMs.',
+    "What's good. Over here, Megatron been trying to fry my ass, then there's Bumblebee acting all cute with the ladies.",
     params
   );
 });
