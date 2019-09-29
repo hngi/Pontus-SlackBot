@@ -82,7 +82,7 @@ const handleMessage = async data => {
     sendConvo(newMessage, useremail, username);
   } else if (message.includes('<@UNHKYFFPV> help')) {
     runHelp(username);
-  } else if (message[0].includes('<@UNHKYFFPV>') && message[1] === undefined) {
+  } else if (message.includes('<@UNHKYFFPV>')) {
     randomMessage(username);
   } else if (
     message.includes('<@UNHKYFFPV> what can you do') ||
