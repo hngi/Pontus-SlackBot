@@ -84,6 +84,17 @@ const handleMessage = async data => {
     runHelp(username);
   } else if (message.includes('<@UNHKYFFPV>')) {
     randomMessage(username);
+  } else if (
+    message.includes('<@UNHKYFFPV> what can you do') ||
+    message.includes('<@UNHKYFFPV> what do you do') ||
+    message.includes('<@UNHKYFFPV> what are you')
+  ) {
+    whatMessage();
+  } else if (
+    message.includes("<@UNHKYFFPV> what's up") ||
+    message.includes('<@UNHKYFFPV> how far')
+  ) {
+    whatsGood();
   }
   // return console.log(conversations)
 };
@@ -173,6 +184,30 @@ const randomMessage = username => {
   bot.postMessageToUser(
     `${username}`,
     `How's it going? You can always use the help command if you need me `,
+    params
+  );
+};
+
+const whatMessage = () => {
+  const params = {
+    icon_emoji: ':worried:',
+  };
+
+  bot.postMessageToUser(
+    `pontus`,
+    `I am a decepticon, I devour planets on weekends. Haha . Just kidding, I help save conversations `,
+    params
+  );
+};
+
+const whatsGood = () => {
+  const params = {
+    icon_emoji: ':worried:',
+  };
+
+  bot.postMessageToUser(
+    `pontus`,
+    `Nothing so exciting. Megatron been trying to fry my ass, then there's Bumblebee acting all cute with the ladies. I am safe, You? `,
     params
   );
 };
