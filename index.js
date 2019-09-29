@@ -36,7 +36,7 @@ bot.on('start', () => {
 
   bot.postMessageToChannel(
     'random',
-    "What's good. Over here, Megatron been trying to fry my ass, then there's Bumblebee acting all cute with the ladies.",
+    'I am a decepticon, I devour planets on weekends. Haha . Just kidding, I help save conversations.',
     params
   );
 });
