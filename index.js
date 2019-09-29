@@ -56,17 +56,17 @@ bot.on('message', data => {
 // Reaponse to data
 const handleMessage = async data => {
   let message = data.text;
+  let channel = data.channel;
+  let id = data.user;
+  const users = await bot.users;
+  const user = users.find(user => {
+    return user.id == id;
+  });
 
   if (message.includes(' save-this')) {
-    let id = data.user;
     let userConvo = message.replace(' save-this', '');
-    const users = await bot.users;
-    const user = users.find(user => {
-      return user.id == id;
-    });
-
     const useremail = user.profile.email.toLowerCase();
-    const username = user.name;
+    let username = user.name;
 
     // console.log(username);
 
@@ -79,7 +79,8 @@ const handleMessage = async data => {
 
     sendConvo(newMessage, useremail, username);
   } else if (message.includes(' help')) {
-    runHelp();
+    let username = user.name;
+    runHelp(username);
   }
   // return console.log(conversations)
 };
@@ -112,13 +113,13 @@ const sendConvo = (data, useremail, username) => {
 };
 
 // Show Help
-const runHelp = () => {
+const runHelp = username => {
   const params = {
     icon_emoji: ':question:',
   };
 
-  bot.postMessageToChannel(
-    'pontus',
+  bot.postMessageToUser(
+    `${username}`,
     `Type *@pontus* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
