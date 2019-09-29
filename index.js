@@ -66,7 +66,7 @@ const handleMessage = async data => {
   console.log(message);
 
   if (message.includes('<@UNHKYFFPV> save-this')) {
-    let userConvo = message.replace('<@UNHKYFFPV> save-this', '');
+    let userConvo = message.replace(' save-this', '');
     const useremail = user.profile.email.toLowerCase();
     let username = user.name;
 
