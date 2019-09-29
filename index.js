@@ -142,7 +142,7 @@ const runHelp = () => {
   }
 
   bot.postMessageToChannel(
-    'general',
+    'pontus',
     `Type *@saveconvo* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
