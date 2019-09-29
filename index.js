@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 
 // Create a simple server
 const server = http.createServer(function (req, res) {
-  res.writeHead(200, {
+  res.writeHead(302, {
     "Content-type": "text/plain"
   });
   res.end(`Pontus reporting...... The decepticons are live at port: ${port}. The revolution will be televised`);
