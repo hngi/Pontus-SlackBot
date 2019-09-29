@@ -105,7 +105,7 @@ const handleMessage = async (data) => {
 
     sendConvo(newMessage, useremail, username)
   } else if (message.includes(' help')) {
-    runHelp(username)
+    runHelp(channel)
   }
   // return console.log(conversations)
 }
@@ -137,13 +137,13 @@ const sendConvo = (data, useremail, username) => {
 }
 
 // Show Help
-const runHelp = (username) => {
+const runHelp = (channel) => {
   const params = {
     icon_emoji: ':question:'
   }
 
   bot.postMessageToChannel(
-    username,
+    `${channel}`,
     `Type *@pontus* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
