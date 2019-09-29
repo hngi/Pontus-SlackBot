@@ -1,5 +1,5 @@
 {
-  "name": "saveconvo",
+  "name": "Pontus-Saver",
   "version": "1.0.0",
   "description": "Slackbot that saves user conversations",
   "main": "index.js",
