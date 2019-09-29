@@ -165,13 +165,13 @@ const messageEmpty = username => {
   );
 };
 
-const randomMessage = channel => {
+const randomMessage = username => {
   const params = {
     icon_emoji: ':worried:',
   };
 
-  bot.postMessageToChannel(
-    `${channel}`,
+  bot.postMessageToUser(
+    `${username}`,
     `How's it going? You can always use the help command if you need me `,
     params
   );
