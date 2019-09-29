@@ -55,7 +55,7 @@ app.get('/auth/redirect', (req, res) => {
 // Initialise bot
 const bot = new SlackBot({
   token: `${process.env.BOT_TOKEN}`,
-  name: 'Pontus-Saver',
+  name: 'saveconvo',
 });
 
 bot.on('start', () => {
@@ -143,7 +143,7 @@ const runHelp = () => {
 
   bot.postMessageToChannel(
     'general',
-    `Type *@Pontus-saver* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
+    `Type *@saveconvo* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
 }
