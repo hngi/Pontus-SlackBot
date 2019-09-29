@@ -81,6 +81,7 @@ bot.on('message', (data) => {
 // Reaponse to data
 const handleMessage = async (data) => {
   let message = data.text;
+  let channel = data.channel
 
   if (message.includes(' save-this')) {
     let id = data.user;
@@ -142,7 +143,7 @@ const runHelp = () => {
   }
 
   bot.postMessageToChannel(
-    'pontus',
+    channel,
     `Type *@pontus* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
@@ -168,7 +169,7 @@ const notSaved = (username) => {
 
   bot.postMessageToUser(
     `${username}`,
-    `Your message was not saved. Please you'll need to sign up on the <https://gjengineer.com/pontus/pontusdrive.com/register.php|external drive>`,
+    `Your message was not saved. Please you'll need to sign up on the <https://pontus-slackbot.herokuapp.com/|external drive>`,
     params
   );
 }
