@@ -105,7 +105,7 @@ const handleMessage = async (data) => {
 
     sendConvo(newMessage, useremail, username)
   } else if (message.includes(' help')) {
-    runHelp()
+    runHelp(channel)
   }
   // return console.log(conversations)
 }
@@ -137,7 +137,7 @@ const sendConvo = (data, useremail, username) => {
 }
 
 // Show Help
-const runHelp = () => {
+const runHelp = (channel) => {
   const params = {
     icon_emoji: ':question:'
   }
