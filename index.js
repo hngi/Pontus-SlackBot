@@ -63,7 +63,7 @@ bot.on('start', () => {
     icon_emoji: ':robot_face:',
   };
 
-  bot.postMessageToChannel('general', 'Pontus reporting...I can save your conversations when mentioned in your DMs.', params);
+  bot.postMessageToChannel('pontus', 'Pontus reporting...I can save your conversations when mentioned in your DMs.', params);
 });
 
 // Error Handler
@@ -105,7 +105,7 @@ const handleMessage = async (data) => {
 
     sendConvo(newMessage, useremail, username)
   } else if (message.includes(' help')) {
-    runHelp(channel)
+    runHelp(username)
   }
   // return console.log(conversations)
 }
@@ -137,13 +137,13 @@ const sendConvo = (data, useremail, username) => {
 }
 
 // Show Help
-const runHelp = (channel) => {
+const runHelp = (username) => {
   const params = {
     icon_emoji: ':question:'
   }
 
   bot.postMessageToChannel(
-    channel,
+    username,
     `Type *@pontus* with *save-this* then paste the contents you want to save and *help* to get this instruction again`,
     params
   );
