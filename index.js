@@ -83,6 +83,8 @@ const handleMessage = async data => {
   } else if (message.includes('<@UNHKYFFPV> help')) {
     let username = user.name;
     runHelp(username);
+  } else if (message.includes('<@UNHKYFFPV>')) {
+    randomMessage(channel);
   }
   // return console.log(conversations)
 };
@@ -160,6 +162,18 @@ const messageEmpty = username => {
   bot.postMessageToUser(
     `${username}`,
     `There is nothing to save here. Please ensure you have copied and pasted the content you wish to save.`,
+    params
+  );
+};
+
+const randomMessage = channel => {
+  const params = {
+    icon_emoji: ':worried:',
+  };
+
+  bot.postMessageToChannel(
+    `${channel}`,
+    `How's it going? You can always use the help command if you need me `,
     params
   );
 };
