@@ -3,6 +3,9 @@ const SlackBot = require('slackbots');
 const axios = require('axios')
 const dotenv = require('dotenv')
 const uuidv4 = require('uuid/v4');
+const express = require('express')
+const request = require('request')
+const app = express()
 
 dotenv.config()
 
@@ -20,6 +23,36 @@ server.listen(port, function () {
   console.log(`Pontus reporting...... The decepticons are live at port: ${port}. The revolution will be televised`)
 });
 
+// GET add button route
+app.get('/auth', (req, res) => {
+  res.sendFile(__dirname + '/add_to_slack.html')
+})
+
+
+//Redirect URL route
+app.get('/auth/redirect', (req, res) => {
+  const options = {
+    uri: 'https://slack.com/api/oauth.access?code=' +
+      req.query.code +
+      '&client_id=' + process.env.CLIENT_ID +
+      '&client_secret=' + process.env.CLIENT_SECRET +
+      '&redirect_uri=' + process.env.REDIRECT_URI,
+    method: 'GET'
+  }
+  request(options, (error, response, body) => {
+    const JSONresponse = JSON.parse(body)
+    if (!JSONresponse.ok) {
+      console.log(JSONresponse)
+      res.send("Error encountered: \n" + JSON.stringify(JSONresponse)).status(200).end()
+    } else {
+      console.log(JSONresponse)
+      res.send("Success!")
+    }
+  })
+})
+
+
+// Initialise bot
 const bot = new SlackBot({
   token: `${process.env.BOT_TOKEN}`,
   name: 'saveconvo',
