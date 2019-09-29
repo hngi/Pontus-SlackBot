@@ -35,7 +35,7 @@ bot.on('start', () => {
   };
 
   bot.postMessageToChannel(
-    'random',
+    'chance',
     'Pontus reporting...I can save your conversations when mentioned in your DMs.',
     params
   );
@@ -63,8 +63,10 @@ const handleMessage = async data => {
     return user.id == id;
   });
 
-  if (message.includes(' save-this')) {
-    let userConvo = message.replace(' save-this', '');
+  console.log(message);
+
+  if (message.includes('<@UNHKYFFPV> save-this')) {
+    let userConvo = message.replace('<@UNHKYFFPV> save-this', '');
     const useremail = user.profile.email.toLowerCase();
     let username = user.name;
 
@@ -78,7 +80,7 @@ const handleMessage = async data => {
     };
 
     sendConvo(newMessage, useremail, username);
-  } else if (message.includes(' help')) {
+  } else if (message.includes('<@UNHKYFFPV> help')) {
     let username = user.name;
     runHelp(username);
   }
