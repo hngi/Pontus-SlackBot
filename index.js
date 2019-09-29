@@ -193,7 +193,7 @@ const whatMessage = () => {
     icon_emoji: ':worried:',
   };
 
-  bot.postMessageToUser(
+  bot.postMessageToChannel(
     `pontus`,
     `I am a decepticon, I devour planets on weekends. Haha . Just kidding, I help save conversations `,
     params
@@ -205,7 +205,7 @@ const whatsGood = () => {
     icon_emoji: ':worried:',
   };
 
-  bot.postMessageToUser(
+  bot.postMessageToChannel(
     `pontus`,
     `Nothing so exciting. Megatron been trying to fry my ass, then there's Bumblebee acting all cute with the ladies. I am safe, You? `,
     params
