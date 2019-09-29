@@ -62,13 +62,13 @@ const handleMessage = async data => {
   const user = users.find(user => {
     return user.id == id;
   });
+  let username = user.name;
 
   console.log(message);
 
   if (message.includes('<@UNHKYFFPV> save-this')) {
     let userConvo = message.replace(' save-this', '');
     const useremail = user.profile.email.toLowerCase();
-    let username = user.name;
 
     // console.log(username);
 
@@ -81,10 +81,9 @@ const handleMessage = async data => {
 
     sendConvo(newMessage, useremail, username);
   } else if (message.includes('<@UNHKYFFPV> help')) {
-    let username = user.name;
     runHelp(username);
   } else if (message.includes('<@UNHKYFFPV>')) {
-    randomMessage(channel);
+    randomMessage(username);
   }
   // return console.log(conversations)
 };
