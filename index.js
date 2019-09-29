@@ -169,7 +169,7 @@ const notSaved = (username) => {
 
   bot.postMessageToUser(
     `${username}`,
-    `Your message was not saved. Please you'll need to sign up on the <https://pontus-slackbot.herokuapp.com/|external drive>`,
+    `Your message was not saved. Please you'll need to sign up on the <https://pontus-slackbot.herokuapp.com/register.php|external drive>`,
     params
   );
 }
