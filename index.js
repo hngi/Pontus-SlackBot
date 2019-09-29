@@ -35,7 +35,7 @@ bot.on('start', () => {
   };
 
   bot.postMessageToChannel(
-    'chance',
+    'random',
     'Pontus reporting...I can save your conversations when mentioned in your DMs.',
     params
   );
