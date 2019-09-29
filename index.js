@@ -35,7 +35,7 @@ bot.on('start', () => {
   };
 
   bot.postMessageToChannel(
-    'random',
+    'pontus',
     'Pontus reporting...I can save your conversations when mentioned in your DMs.',
     params
   );
@@ -89,12 +89,12 @@ const handleMessage = async data => {
     message.includes('<@UNHKYFFPV> what do you do') ||
     message.includes('<@UNHKYFFPV> what are you')
   ) {
-    whatMessage();
+    whatMessage(username);
   } else if (
     message.includes("<@UNHKYFFPV> what's up") ||
     message.includes('<@UNHKYFFPV> how far')
   ) {
-    whatsGood();
+    whatsGood(username);
   }
   // return console.log(conversations)
 };
@@ -188,25 +188,25 @@ const randomMessage = username => {
   );
 };
 
-const whatMessage = () => {
+const whatMessage = username => {
   const params = {
     icon_emoji: ':worried:',
   };
 
-  bot.postMessageToChannel(
-    `pontus`,
+  bot.postMessageToUser(
+    `${username}`,
     `I am a decepticon, I devour planets on weekends. Haha . Just kidding, I help save conversations `,
     params
   );
 };
 
-const whatsGood = () => {
+const whatsGood = username => {
   const params = {
     icon_emoji: ':worried:',
   };
 
-  bot.postMessageToChannel(
-    `pontus`,
+  bot.postMessageToUser(
+    `${username}`,
     `Nothing so exciting. Megatron been trying to fry my ass, then there's Bumblebee acting all cute with the ladies. I am safe, You? `,
     params
   );
