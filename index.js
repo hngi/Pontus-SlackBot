@@ -42,7 +42,7 @@ const emoji = {
 
 const bot = new SlackBot({
   token: `${process.env.BOT_TOKEN}`,
-  name: 'saveconvo',
+  name: 'pontus',
 });
 
 bot.on('start', () => {
