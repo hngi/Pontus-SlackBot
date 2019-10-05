@@ -9,7 +9,7 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 
 // Create a simple server
-const server = http.createServer(function (req, res) {
+const server = http.createServer(function(req, res) {
   res.writeHead(200, {
     'Content-type': 'text/plain',
   });
@@ -18,7 +18,7 @@ const server = http.createServer(function (req, res) {
   );
 });
 
-server.listen(port, function () {
+server.listen(port, function() {
   console.log(
     `Pontus reporting...... The decepticons are live at port: ${port}. The revolution will be televised`
   );
@@ -50,11 +50,13 @@ bot.on('start', () => {
     icon_emoji: ':robot_face:',
   };
 
-  bot.postMessageToChannel(
-    'random',
-    'I am a decepticon, I devour planets on weekends. Haha . Just kidding, I help save conversations.',
-    params
-  );
+  // bot.postMessageToChannel(
+  //   'random',
+  //   'I am a decepticon, I devour planets on weekends. Haha . Just kidding, I help save conversations.',
+  //   params
+  // );
+
+  console.log('Bot running');
 });
 
 // Error Handler
@@ -160,6 +162,7 @@ const getChannelHistory = async (channelId, channel, useremail, username) => {
   const token = process.env.USER_TOKEN;
   const url = 'https://slack.com/api/conversations.history';
   const urlPath = `${url}?token=${token}&channel=${channelId}&count=30&pretty=1`;
+
   try {
     const response = await axios.get(urlPath);
     let res = response.data.messages;
@@ -173,11 +176,30 @@ const getChannelHistory = async (channelId, channel, useremail, username) => {
       };
     });
 
+    let conversation = `hdfjgfj CHANNEL: ${channel.name.toUpperCase()}<br>`;
+
+    history.forEach(item => {
+      if (item.user != undefined) {
+        let message = `${item.timestamp} -- ${item.user}:
+        ${item.message}<br>`;
+        conversation += message;
+      }
+    });
+
+    // let data = {
+    //   token: `${process.env.SERVER_TOKEN}`,
+    //   email: useremail,
+    //   channel: channel.name,
+    //   conversations: history,
+    // };
+
+    console.log(conversation);
+
     let data = {
+      id: uuidv4(),
       token: `${process.env.SERVER_TOKEN}`,
       email: useremail,
-      channel: channel.name,
-      conversations: history,
+      message: conversation,
     };
 
     sendConvo(data, useremail, username);
